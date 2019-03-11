@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block app_content %}
+	<div class="fixed-middle"> <h1 class= "text-center"> {{"{:,}".format(cviews)}} Views </h1></div>
+	<div class="fixed-middle"> <h1 class= "text-center"> Across {{confirmed_channels}} Channels </h1></div>
+	<nav aria-label="...">
+	    <ul class="pager">
+	        <li class="next{% if not next_url %} disabled{% endif %}">
+	            <a href="{{ next_url or '#' }}">
+	                Next Page <span aria-hidden="true">&rarr;</span>
+	            </a>
+	        </li>
+	        <li class="previous{% if not prev_url %} disabled{% endif %}">
+	            <a href="{{ prev_url or '#' }}">
+	                <span aria-hidden="true">&larr;</span> Previous Page
+	            </a>
+	        </li>
+	    </ul>
+	</nav>
+
+
+	<table class="table table-dark">
+		<thead>
+			<br>
+			<tr>
+			{% for col in cols %}
+				<th scope="col">{{ col }}</th>
+			{% endfor %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for channel in channels%}
+			<tr>
+				<td>
+				{% set channel_Id = channel.id %}
+				<a href= {{ url_for('update_channel', channel_Id=channel_Id)}} target="_blank"> Text 2 Speech</a> <br>
+				<a href= {{ url_for('human_channel', channel_Id=channel_Id)}} target="_blank"> Human Read</a> <br>
+				<a href= {{ url_for('subtitle_channel', channel_Id=channel_Id)}} target="_blank"> Subtitled</a> <br>
+				<a href= {{ url_for('not_channel', channel_Id=channel_Id)}} target="_blank"> Channel not T2S</a> <br>				
+				<a href= {{ url_for('null_channel', channel_Id=channel_Id)}} target="_blank"> Reset Channel to Null</a>				
+				{%set videoIDS = []%}
+				{% set count = [1] %}
+				{% for video in channel.videos %}
+					{% if count < [3] %}
+						<td><iframe src="https://www.youtube.com/embed/{{video.videoId}}" width="300" height="200" frameborder="0" allowfullscreen></iframe></td>
+						<td> {{video.title}} </td>
+					{% if count.append(count.pop() + 1) %}{% endif %} 
+					{% endif %}
+				{% endfor %}
+				<td> {{channel.name}} </td>
+				<td> {{"{:,}".format(channel.views)}} </td>
+				<td> {{channel.about}} </td>
+			</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>
+	<nav aria-label="...">
+	    <ul class="pager">
+	        <li class="next{% if not next_url %} disabled{% endif %}">
+	            <a href="{{ next_url or '#' }}">
+	                Next Page <span aria-hidden="true">&rarr;</span>
+	            </a>
+	        </li>
+	        <li class="previous{% if not prev_url %} disabled{% endif %}">
+	            <a href="{{ prev_url or '#' }}">
+	                <span aria-hidden="true">&larr;</span> Previous Page
+	            </a>
+	        </li>
+	    </ul>
+	</nav>
+
+
+{% endblock %}
+
+

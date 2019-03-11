@@ -1,0 +1,2 @@
+CLIENT_ID = 265572427706-npsfsmdla38v2801c6t702aj5d0mn59u.apps.googleusercontent.com
+CLIENT_SECRET = AaD_UikjVCia9yH7tbicmj5T

@@ -1,0 +1,10 @@
+<!-- {% extends 'base.html' %} -->
+{% block content %}
+	<div class="fixed-middle"> <h3 class= "text-center">  You are asking to {{process}}  </h1></div>
+
+    <form method='POST'>
+        {{ form.csrf_token }}
+        {{ form.begin.label }} {{ form.begin(size=20) }}
+        <input type='submit' value='Go'>
+    </form>
+{% endblock %}

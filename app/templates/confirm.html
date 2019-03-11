@@ -1,0 +1,12 @@
+{% extends "bootstrap/base.html" %}
+{% block content %}
+<p>
+	You have marked {{channel_Id}}  {{response}}!
+</p>
+<p>If you change your mind </p>
+<a href= {{ url_for('update_channel', channel_Id=channel_Id)}} target="_blank"> Mark T2S</a> <br>
+<a href= {{ url_for('not_channel', channel_Id=channel_Id)}} target="_blank"> Channel not T2S</a> <br>				
+<a href= {{ url_for('human_channel', channel_Id=channel_Id)}} target="_blank"> Mark Channel Human Read</a> <br>
+<a href= {{ url_for('subtitle_channel', channel_Id=channel_Id)}} target="_blank"> Mark Channel Subtitled</a> <br>
+<a href= {{ url_for('null_channel', channel_Id=channel_Id)}} target="_blank"> Reset Channel to Null</a>	
+{%endblock%}}

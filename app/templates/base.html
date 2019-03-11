@@ -1,0 +1,41 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+
+    {% if title %}{{ title }} - Youtool{% else %}Welcome to YouTools{% endif %}
+{% endblock %}
+{% block navbar %}
+<div class="nav">
+    <button type="button" class="btn btn-default" aria-label="Left Align">
+      <span class="glyphicon glyphicon-globe" aria-hidden="true"> </span>
+      <a href="/channels">View Channels</a>
+    </button>
+   
+    <button type="button" class="btn btn-default" aria-label="Left Align">
+      <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+      <a href="/domains">View Websites</a>
+    </button>
+
+    <button type="button" class="btn btn-default" aria-label="Left Align">
+      <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
+      <a href="/allresults">Join the Fight</a>
+    </button>
+</div>
+{% endblock %}}
+
+
+{% block content %}
+    <meta name="google-site-verification" content="bGribim1myYUlaiQSSMr4kiCJXnwHqpJjQPLs7BbDuI" />
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {# application content needs to be provided in the app_content block #}
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}
