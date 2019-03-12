@@ -4,11 +4,11 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config(object):
-    DEBUG = False
+    DEBUG = True
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = 'this-really-needs-to-be-changed'
-    SQLALCHEMY_DATABASE_URI = 'postgres://dveqlsgrtftfdx:52e239ef3405006574af50d047e5471d92701851c178324be5e3dc6e9a0ed30e@ec2-54-235-133-42.compute-1.amazonaws.com:5432/d7h7vcorntejtl'
+    SQLALCHEMY_DATABASE_URI = 'postgres://rqvkuhlratqbny:82825d01568d3afbe704e2735d20f993e12fd8c0037f4780d0059678528e4b28@ec2-54-228-252-67.eu-west-1.compute.amazonaws.com:5432/dbqbkmp55dpu7g'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     TOKEN_URI = 'https://www.googleapis.com/oauth2/v3/token'
 

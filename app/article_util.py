@@ -5,6 +5,16 @@ import re
 from newspaper import Article as NA
 
 
+def find_website(url):  #returns entrys id based on url
+    try:
+        W = Website.query.filter_by(base_url = url).first()
+        if W is not None:
+            return W.id
+        else: 
+            return None
+    except Exception as e:
+        print(e)
+
 
 def parse_url(url):
 	# for url in urls:
@@ -17,7 +27,7 @@ def parse_url(url):
 		return result
 
 def fresh_parse_article(url, wid):
-	# print(url)
+	print(url)
 	if  "'" in url:
 		try:
 			url = url.replace("'", "%E2%80%99")
@@ -33,7 +43,7 @@ def fresh_parse_article(url, wid):
 	author = str(article.authors)
 	title = article.title
 	domain = parse_url(url)
-	
+	print('come on')
 	update_articleInfo(title, description, url, date, author, wid, body)
 
 def parse_article(url, domain):

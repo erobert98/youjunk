@@ -4,12 +4,15 @@ from app.search_by_title import article_2Youtube
 from app.youtube_transcript import pull_transcript
 from app.gga_edited import *
 from app.youtubeUtil import parse_videoDetails, videos_list_multiple_ids
+from datetime import datetime
+from app.db_util_website import mark_article_searched
+from app.article_util import parse_url
 
 
 
 
 def search_articles1():
-    now = datetime.datetime.now()
+    now = datetime.now()
     client = build_client()
     # current_time = datetime.now()
     # two_weeks_ago = now - datetime.timedelta(days=1)
@@ -55,7 +58,7 @@ def search_articles1():
                                 else:
                                     print(e)
                                     raise ValueError 
-                            transcript = parse_videoDetails(response, client, transcript)
+                            transcript = parse_videoDetails(response, client, transcript, aid)
                             link_article2video(videoId['videoId'], link)
                             mark_website_used(link)
                             print('ya yeet')
@@ -80,7 +83,7 @@ def search_articles1():
                 print(f"{e} reeeeee")
                 # continue
 
-        end = datetime.datetime.now()
+        end = datetime.now()
         length = end - now  
         print(f"took {length} to process {counter} articles")
 

@@ -17,6 +17,21 @@ from app.update_articles import *
 from app.search_articles import *
 from app.add_channelVideos import *
 
+@app.route('/articles')
+def articles():
+  A = Article.query.all()
+  page = request.args.get('page', 1, type=int)
+  articles = Article.query.paginate(page, 10, False)
+  A = Article.query.count()
+  last_page = math.ceil(int(A) / int(10))
+  print(last_page)
+  next_url = url_for('articles', page=articles.next_num) \
+    if articles.has_next else None
+  prev_url = url_for('articles', page=articles.prev_num) \
+    if articles.has_prev else None
+
+  return render_template('articles.html', articleCount = A, articles = articles.items, cols =['URL','Name','Article Titles'], page = page, next_url=next_url, prev_url=prev_url, last_page=last_page)
+
 
 @app.route('/')
 def index():

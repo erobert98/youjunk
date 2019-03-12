@@ -1,6 +1,8 @@
 from app.add_website import add_websiteInfo, pull_websiteData
 from app.db_util_website import mark_article_searched
-from app.article_util import fresh_parse_article
+from app.article_util import fresh_parse_article, parse_url
+from app.models import Article, Website
+from app import db
 
 
 def update_articles1(): #convert to find articles where they a) have article.id and b) 
@@ -11,7 +13,6 @@ def update_articles1(): #convert to find articles where they a) have article.id 
         # print(articles)
         articleIds = []
         for a in articles:
-            # print('uh')
             articleIds.append(a.id)
         print(articleIds)
         for id_ in articleIds:
@@ -19,7 +20,6 @@ def update_articles1(): #convert to find articles where they a) have article.id 
             url = A.link
             print(f'working on {url}')
             domain = parse_url(url)
-            # print('what')
             feed = domain + 'feed'
             if domain in dead_domains:
                 mark_article_searched(url)
@@ -30,7 +30,8 @@ def update_articles1(): #convert to find articles where they a) have article.id 
                 mark_article_searched(url)
                 print(f'{domain} is a dead domain')
                 continue
-            wid = find_website(domain)
+            wid = find_website(domain) #internal search
+            print(wid)
             if wid is None:
                 # print(feed)
                 try:    
@@ -52,6 +53,7 @@ def update_articles1(): #convert to find articles where they a) have article.id 
                     print(f'{url} updated')
                     # counter += 1
                 except Exception as e:
+                    print(e)
                     if 'HTTPSConnectionPool' in str(e):
                         # insecure_connection()
                         A.searched = True
@@ -81,7 +83,7 @@ def find_dead_domains():  #returns list of dead domains
 def mark_article_updated(url):
     try:
         A = Article.query.filter_by(link = url).first()
-        A.updated = False
+        A.updated = True
         db.session.commit()
     except Exception as e:
         print(e)

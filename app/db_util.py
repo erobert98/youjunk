@@ -101,7 +101,7 @@ def find_channel(channelID):
 
 # find_channel(ChannelID)
 
-def save_videoInfo(VideoID, Title, Description, ChannelID, transcript, likes, dislikes, views, comments):  #should this  call the function that pulls STATS
+def save_videoInfo(VideoID, Title, Description, ChannelID, transcript, likes, dislikes, views, comments, aid):  #should this  call the function that pulls STATS
     '''
       Arguments : Takes video details
       Function: Creates database entry 
@@ -113,7 +113,7 @@ def save_videoInfo(VideoID, Title, Description, ChannelID, transcript, likes, di
         cid = ChannelID
         # raise ValueError('save_videoInfo not malleable')
     try:
-        V = Video(channel_Id = cid, videoId = VideoID, title = Title, searched = True,description = Description, needs_stats = True, transcript = transcript, dislikes = dislikes, likes = likes, views = views , comments = comments)
+        V = Video(channel_Id = cid, videoId = VideoID, title = Title, searched = True,description = Description, needs_stats = True, transcript = transcript, dislikes = dislikes, likes = likes, views = views , comments = comments, article_Id = aid)
         db.session.add(V)
         db.session.commit()
         return True
@@ -141,7 +141,7 @@ def update_channelVideos(VideoID, Title, Description, ChannelID, transcript, lik
         print(f'Updated video {VideoID}')
 
     except Exception as e:
-        if save_videoInfo(VideoID, Title, Description, ChannelID, transcript, likes, dislikes, views, comments):
+        if save_videoInfo(VideoID, Title, Description, ChannelID, transcript, likes, dislikes, views, comments, article_Id = aid):
             print(f'added video {VideoID}')
         
 

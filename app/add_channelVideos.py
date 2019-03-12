@@ -32,7 +32,7 @@ def add_channelVideos(): #should be called scrape_new_channel  and need to imple
       except Exception as e:
         if 'credentials' in str(e):
           client =  build_client()  #this one shouldnt ever be called but u never know 
-          add_channel()    #calls again in case it messes up
+          add_channelVideos()    #calls again in case it messes up
     print('moving on')  
     
   

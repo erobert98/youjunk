@@ -1,4 +1,7 @@
-from app.models import *
+from app.models import Article
+from app.db_util import add_link
+import csv
+import re
 
 def confirm_newLink(item):
     A = Article.query.filter_by(link = item).first()
@@ -10,7 +13,7 @@ def confirm_newLink(item):
 
 
 
-def add_from_csv(f):
+def add_from_csv(f):  
     # f = open('./articles.csv')
     # csv_f = csv.reader(f, dialect='UTF8')
     # print('ok')

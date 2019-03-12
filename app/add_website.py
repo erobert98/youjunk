@@ -2,6 +2,7 @@ from app.db_util_website import *
 import datetime
 import json
 from bs4 import BeautifulSoup as parser
+import feedparser
 
 
 
@@ -29,14 +30,14 @@ def add_websiteInfo(url, feed):   #add field for sites when they have a vid
 		# parse_websiteArticles(feed, details['Base_url'])
 	except Exception as e:
 		print(e)
-		print(f'bet its a bad {domain} on link {url}')
+		print(f'bet its a bad domain on link {url}')
 		add_DeadWebsite(url, feed)
 		 
 
 
 
 
-def pull_websiteData(URL):
+def pull_websiteData(URL): #FIX THOIS 
 	try:
 		try:
 			data = feedparser.parse(URL)
@@ -69,4 +70,3 @@ def pull_websiteData(URL):
 
 
 
-#

@@ -169,7 +169,7 @@ def parse_channelInfo(response):
     }
   return channel_details
 
-def parse_videoDetails(response, client, transcript):
+def parse_videoDetails(response, client, transcript, aid):
   '''
   Arguments : PlaylistItems List API Response 
   Function: Pulls relevant information and calls save_videoInfo

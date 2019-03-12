@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block app_content %}
+<div class="fixed-middle"> <h1 class= "text-center">  {{articleCount}} Sites Have Their Content Affected</h1></div>
+
+<nav aria-label="...">
+    <ul class="pager">
+        <li class="next{% if not next_url %} disabled{% endif %}">
+            <a href="{{ next_url or '#' }}">
+                Next Page <span aria-hidden="true">&rarr;</span>
+            </a>
+        </li>
+        <li class="previous{% if not prev_url %} disabled{% endif %}">
+            <a href="{{ prev_url or '#' }}">
+                <span aria-hidden="true">&larr;</span> Previous Page
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<table class="table table-dark">
+    <thead>
+        <br>
+        <tr>
+        {% for col in cols %}
+            <th scope="col">{{ col }}</th>
+        {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for article in articles%}
+        <tr>
+            <td><a href ={{article.link}}> {{article.link}} </td>
+            <td> {{article.title}}  </a> </td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+<nav aria-label="...">
+    <ul class="pager">
+        <li class="next{% if not next_url %} disabled{% endif %}">
+            <a href="{{ next_url or '#' }}">
+                Next Page <span aria-hidden="true">&rarr;</span>
+            </a>
+        </li>
+        <li class="previous{% if not prev_url %} disabled{% endif %}">
+            <a href="{{ prev_url or '#' }}">
+                <span aria-hidden="true">&larr;</span> Previous Page
+            </a>
+        </li>
+    </ul>
+</nav>
+
+{% endblock %}
